@@ -5,5 +5,8 @@ const router = express.Router();
 
 router.post('/register', register);
 router.post('/login', login);
+router.get('/profile', (req, res) => {
+  res.json({ message: 'Rota protegida - em desenvolvimento' });
+});
 
 export default router;
