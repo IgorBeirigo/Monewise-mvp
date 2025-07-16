@@ -8,20 +8,67 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String
-  entries   Entry[]
-  createdAt DateTime @default(now())
+  id         Int       @id @default(autoincrement())
+  name       String
+  email      String    @unique
+  password   String
+  entries    Entry[]
+  budgets    Budget[]
+  goals      Goal[]
+  categories Category[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
 
 model Entry {
+  id          Int      @id @default(autoincrement())
+  type        String   // income ou expense
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  amount      Float
+  description String?
+  date        DateTime
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Category {
   id        Int      @id @default(autoincrement())
+  name      String
   type      String   // income ou expense
-  category  String
-  amount    Float
-  date      DateTime
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  icon      String?
+  color     String?
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
+  entries   Entry[]
+  budgets   Budget[]
+  isDefault Boolean  @default(false)
+}
+
+model Budget {
+  id         Int      @id @default(autoincrement())
+  amount     Float
+  spent      Float    @default(0)
+  month      Int
+  year       Int
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Goal {
+  id          Int      @id @default(autoincrement())
+  name        String
+  targetAmount Float
+  currentAmount Float   @default(0)
+  deadline    DateTime?
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
