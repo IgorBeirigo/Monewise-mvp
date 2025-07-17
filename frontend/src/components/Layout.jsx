@@ -13,8 +13,8 @@ function Layout() {
         sx={{
           flexGrow: 1,
           p: 3,
-          mt: 8, // Espaço para o header
-          ml: { sm: '240px' }, // Largura do sidebar
+          mt: 8, // Espaço para o header de 8 *8px
+          ml: { sm: '240px' }, // Largura do sidebar 240px
           backgroundColor: '#f5f5f5',
         }}
       >

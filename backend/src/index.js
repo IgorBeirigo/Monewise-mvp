@@ -7,27 +7,17 @@ dotenv.config();
 
 const app = express();
 
-// Middlewares de parsing (devem vir primeiro)
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// Middleware de log para debugar as requisições
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
-  console.log('Body:', req.body);
-  console.log('Headers:', req.headers);
-  next();
-});
-
-// Rota de teste (deve vir antes das outras rotas)
+// Rota de teste
 app.get('/health', (req, res) => {
   console.log('Health check endpoint acessado');
   res.json({ status: 'API is running' });
 });
 
 // Rotas da API
-app.use('/api/v1/users', userRoutes); 
+app.use('/api/v1/users', userRoutes);
 
 // Middleware de erro 404
 app.use((req, res) => {

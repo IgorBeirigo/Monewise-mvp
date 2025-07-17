@@ -6,23 +6,31 @@ const prisma = new PrismaClient();
 const saltRounds = 10;
 
 export async function registerUser(name, email, password) {
-  const existingUser = await prisma.user.findUnique({ where: { email } });
+  try {
+    const existingUser = await prisma.user.findUnique({ where: { email } });
 
-  if (existingUser) {
-    throw new Error('E-mail já cadastrado');
-  }
-
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-  const user = await prisma.user.create({
-    data: {
-      name,
-      email,
-      password: hashedPassword
+    if (existingUser) {
+      throw new Error('E-mail já cadastrado');
     }
-  });
 
-  return user;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword
+      }
+    });
+
+    // Remove a senha antes de retornar
+    const { password: _, ...userWithoutPassword } = user;
+    return userWithoutPassword;
+
+  } catch (error) {
+    console.error('Erro ao registrar usuário:', error);
+    throw error;
+  }
 }
 
 export async function loginUser(email, password) {

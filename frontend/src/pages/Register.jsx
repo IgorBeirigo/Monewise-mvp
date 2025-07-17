@@ -3,23 +3,22 @@ import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { Box, TextField, Button, Typography, Link } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import api from '../services/api';
-import { useAuth } from '../contexts/AuthContext';
 
-function Login() {
+function Register() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await api.post('/users/login', { email, password });
-      login(data.user, data.token);
-      navigate('/');
+      await api.post('/users/register', { name, email, password });
+      enqueueSnackbar('Conta criada com sucesso!', { variant: 'success' });
+      navigate('/login');
     } catch (error) {
-      enqueueSnackbar(error.response?.data?.error || 'Erro ao fazer login', { 
+      enqueueSnackbar(error.response?.data?.error || 'Erro ao criar conta', { 
         variant: 'error' 
       });
     }
@@ -50,37 +49,50 @@ function Login() {
           MoneyWise
         </Typography>
         <Typography variant="h6" align="center" gutterBottom>
-          Login
+          Criar Conta
         </Typography>
-        <TextField 
-          fullWidth 
-          label="Email" 
-          margin="normal" 
+
+        <TextField
+          fullWidth
+          label="Nome"
+          margin="normal"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <TextField
+          fullWidth
+          label="Email"
+          margin="normal"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
-        <TextField 
-          fullWidth 
-          label="Senha" 
-          type="password" 
-          margin="normal" 
+        <TextField
+          fullWidth
+          label="Senha"
+          type="password"
+          margin="normal"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
+        
         <Button 
           type="submit" 
           variant="contained" 
           fullWidth 
           sx={{ mt: 2 }}
         >
-          Entrar
+          Criar Conta
         </Button>
         
         <Box sx={{ mt: 2, textAlign: 'center' }}>
           <Typography variant="body2">
-            Não tem uma conta?{' '}
-            <Link component={RouterLink} to="/register">
-              Registre-se
+            Já tem uma conta?{' '}
+            <Link component={RouterLink} to="/login">
+              Faça login
             </Link>
           </Typography>
         </Box>
@@ -89,4 +101,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
