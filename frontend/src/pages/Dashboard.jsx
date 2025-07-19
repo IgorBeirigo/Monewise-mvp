@@ -20,7 +20,7 @@ function Dashboard() {
               <AccountBalance sx={{ fontSize: 40 }} />
               <Typography variant="h6">Saldo Total</Typography>
             </Box>
-            <Typography variant="h4" sx={{ mt: 2 }}>R$ 5.000,00</Typography>
+            <Typography variant="h4" sx={{ mt: 2 }}>R$ 2.200,00</Typography>
           </Paper>
         </Grid>
         

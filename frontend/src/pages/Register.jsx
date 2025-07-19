@@ -40,7 +40,7 @@ function Register() {
         sx={{
           width: 300,
           p: 4,
-          backgroundColor: 'white',
+          backgroundColor: 'offwhite',
           borderRadius: 2,
           boxShadow: 1
         }}

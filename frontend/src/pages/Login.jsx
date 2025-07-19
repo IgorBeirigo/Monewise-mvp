@@ -32,16 +32,16 @@ function Login() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#f5f5f5'
+        backgroundColor: '#cec0c0ff'
       }}
     >
       <Box
         component="form"
         onSubmit={handleSubmit}
         sx={{
-          width: 300,
+          width: 400,
           p: 4,
-          backgroundColor: 'white',
+          backgroundColor: 'offwhite',
           borderRadius: 2,
           boxShadow: 1
         }}
