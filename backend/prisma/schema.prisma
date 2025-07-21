@@ -75,15 +75,12 @@ model Budget {
 }
 
 model Goal {
-  id            Int      @id @default(autoincrement())
-  name          String
-  targetAmount  Float
-  currentAmount Float    @default(0)
-  deadline      DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  // Relação com User
-  userId        Int
-  user          User     @relation(fields: [userId], references: [id])
+   id       Int    @id @default(autoincrement())
+  titulo    String
+  valor     Float
+  dataFim   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 }

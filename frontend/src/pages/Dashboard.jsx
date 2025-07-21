@@ -39,7 +39,7 @@ function Dashboard() {
               <TrendingUp sx={{ fontSize: 40 }} />
               <Typography variant="h6">Receitas</Typography>
             </Box>
-            <Typography variant="h4" sx={{ mt: 2 }}>R$ 3.500,00</Typography>
+            <Typography variant="h4" sx={{ mt: 2 }}>R$ 2.200,00</Typography>
           </Paper>
         </Grid>
         
@@ -58,7 +58,7 @@ function Dashboard() {
               <TrendingDown sx={{ fontSize: 40 }} />
               <Typography variant="h6">Despesas</Typography>
             </Box>
-            <Typography variant="h4" sx={{ mt: 2 }}>R$ 2.100,00</Typography>
+            <Typography variant="h4" sx={{ mt: 2 }}>R$ 545,53</Typography>
           </Paper>
         </Grid>
       </Grid>
